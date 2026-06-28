@@ -397,7 +397,6 @@ input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
           <button class="metric-btn active" data-metric="followers">팔로워</button>
           <button class="metric-btn" data-metric="reach">도달</button>
           <button class="metric-btn" data-metric="views">조회수</button>
-          <button class="metric-btn" data-metric="roas">ROAS</button>
           <button class="metric-btn" data-metric="revenue">매출</button>
           <button class="metric-btn" data-metric="spend">지출</button>
         </div>
@@ -1250,13 +1249,13 @@ let activeRange=24;
 
 async function loadIgData(){
   try{
-    const r=await window.storage.get(DATA_KEY);
+    const r=await storeGet(DATA_KEY);
     if(r&&r.value) igData=JSON.parse(r.value);
     else{ igData=[...SEED_DATA]; await saveIgData(); }
   }catch(e){ igData=[...SEED_DATA]; }
 }
 async function saveIgData(){
-  try{ await window.storage.set(DATA_KEY,JSON.stringify(igData)); }catch(e){}
+  try{ await storeSet(DATA_KEY,JSON.stringify(igData)); }catch(e){}
 }
 
 const METRIC_CFG={
